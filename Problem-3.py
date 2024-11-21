@@ -1,8 +1,10 @@
 import random
 
-def get_random_card():
+def getRandomCard():
     card=random.randint(1,12)
     return card
+
+def 
 
 def main():
     turn=0
@@ -13,8 +15,8 @@ def main():
     while True:
         turn +=1
         print(f'Game {turn}')
-        myCard=get_random_card()
-        dealerCard=get_random_card()
+        myCard=getRandomCard()
+        dealerCard=getRandomCard()
         print(f'YOU   : [{myCard:2}]')
         print(f'DEALER: [{dealerCard:2}]')
         break
