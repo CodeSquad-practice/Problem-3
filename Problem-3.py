@@ -10,6 +10,18 @@ def printRecord(win,draw,lose):
     else:
         print(f'현재전적 : {win}승 {draw}무 {lose}패')
 
+def isPlayingAgain():
+    while True:
+        print('한 게임 더 하시겠습니까? (Y/N)',end=' ')
+        order = input()
+        if order == 'Y' or order == 'y':
+            return True
+        elif order =='N' or order =='n':
+            return False
+        else: 
+            print('잘못 입력하셨습니다.')
+    
+
 def main():
     turn=0
     win=0
@@ -35,6 +47,8 @@ def main():
             lose+=1
             print('딜러가 이겼습니다.')
         printRecord(win,draw,lose)
+
+        isPlayingAgain()
         break
 
 if __name__=='__main__':
