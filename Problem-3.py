@@ -1,7 +1,7 @@
 import random
 
 def getRandomCard():
-    card=random.randint(1,12)
+    card=random.randint(1,11)
     return card
 
 def printRecord(win,draw,lose):
@@ -41,16 +41,14 @@ def main():
         turn +=1
         print()
         print(f'Game {turn}')
-        myCard=getRandomCard()
-        dealerCard=getRandomCard()
-        myCards.append(myCard)
-        dealerCards.append(dealerCard)
+        myCards.append(getRandomCard())
+        dealerCards.append(getRandomCard())
         printPlayerDealerCards(myCards,dealerCards)
 
-        if myCard>dealerCard:
+        if myCards[-1]>dealerCards[-1]:
             win+=1
             print('당신이 이겼습니다.')
-        elif myCard==dealerCard:
+        elif myCards[-1]==dealerCards[-1]:
             draw+=1
             print('비겼습니다.')
         else:
@@ -61,8 +59,6 @@ def main():
         if not isPlayingAgain():
             print('게임을 종료합니다.\n플레이해주셔서 감사합니다.')
             break
-
-        
 
 if __name__=='__main__':
     main()
