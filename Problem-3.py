@@ -21,21 +21,31 @@ def isPlayingAgain():
         else: 
             print('잘못 입력하셨습니다.')
     
+def printPlayerDealerCards(playerCards,dealerCards):
+    print('YOU   : ',end='')
+    for card in playerCards:
+        print(f'[{card:2}]',end=' ')
+    print()
+    print('Dealer: ',end='')
+    for card in dealerCards:
+        print(f'[{card:2}]',end=' ')
+    print()
+
 
 def main():
-    turn=0
-    win=0
-    lose=0
-    draw=0
+    turn,win,lose,draw=0,0,0,0
+    myCards=[]
+    dealerCards=[]
     print('간단 카드게임을 시작합니다.')
-    print()
     while True:
         turn +=1
+        print()
         print(f'Game {turn}')
         myCard=getRandomCard()
         dealerCard=getRandomCard()
-        print(f'YOU   : [{myCard:2}]')
-        print(f'DEALER: [{dealerCard:2}]')
+        myCards.append(myCard)
+        dealerCards.append(dealerCard)
+        printPlayerDealerCards(myCards,dealerCards)
 
         if myCard>dealerCard:
             win+=1
@@ -48,8 +58,11 @@ def main():
             print('딜러가 이겼습니다.')
         printRecord(win,draw,lose)
 
-        isPlayingAgain()
-        break
+        if not isPlayingAgain():
+            print('게임을 종료합니다.\n플레이해주셔서 감사합니다.')
+            break
+
+        
 
 if __name__=='__main__':
     main()
