@@ -17,7 +17,7 @@ def makeRandomCardArray():
 #     else:
 #         print(f'현재전적 : {win}승 {draw}무 {lose}패')
 
-def isPlayingAgain():
+def getMoreCard():
     while True:
         print('카드를 더 받겠습니까? (Y/N)',end=' ')
         order = input()
@@ -62,10 +62,22 @@ def playerTurn(deck,playerHand):
         print(f'[{elem:2}]',end='')
     print()
 
+def playGame(deck,playerHand):
+    while True:
+        playerTurn(deck,playerHand)
+        sumCards=printSum(playerHand)
+        if sumCards>21:
+            #플레이어 패배
+            # money-=betMoney
+            # print("당신의 패배입니다. 현재 재산:",money)
+            break
+        if not getMoreCard():
+            break
+            
 
 def main():
     money=1000
-    
+    turn=0
     deck=makeRandomCardArray()
     playerHand=[]
     print("간단 카드게임을 시작합니다.")
@@ -73,19 +85,15 @@ def main():
     betMoney=bettingMoney(money)
 
     while True:
-        playerTurn(deck,playerHand)
-        sumCards=printSum(playerHand)
-        if sumCards>21:
-            #플레이어 패배
-            money-=betMoney
-            print("당신의 패배입니다. 현재 재산:",money)
-            break
-        if not isPlayingAgain():
-            break
+        turn+=1
+        print("Game",turn)
+        playGame(deck, playerHand)
+        break
+
         
 
 
-#     turn,win,lose,draw=0,0,0,0
+    
 #     myCards=[]
 #     dealerCards=[]
 #     print('간단 카드게임을 시작합니다.')
