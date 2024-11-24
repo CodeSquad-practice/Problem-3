@@ -109,8 +109,6 @@ def playGame(deck,playerHand):
         sumCards=printSum(playerHand)
         if sumCards>21:
             # 플레이어가 받은 카드의 합이 22 이상이면 무조건 플레이어의 패배이다. 이 때 딜러는 카드를 받지 않는다.
-            # money-=betMoney
-            # print("당신의 패배입니다. 현재 재산:",money)
             return "D"
         if not getMoreCard():
             # 플레이어가 카드를 더 이상 안 받기로 결정한 시점에서 딜러도 카드를 받는다.
@@ -118,7 +116,17 @@ def playGame(deck,playerHand):
             winner=findWinner(sumCards,dealerSum)
             return winner
             
-            
+def gameResult(winner,money,betMoney):
+    if winner=="P":
+        print("당신의 승리입니다.")
+        money+=betMoney
+    elif winner=="D":
+        print("당신의 패배입니다.")
+        money-=betMoney
+    else:
+        print("비겼습니다.")
+    print("현재 남은 자산:",money)
+    return money
 
 def main():
     money=1000
@@ -133,8 +141,10 @@ def main():
         turn+=1
         print("Game",turn)
         playerHand=[]
-        playGame(deck, playerHand)
+        winner=playGame(deck, playerHand)
+        money=gameResult(winner,money,betMoney)
         
+
         # 한 게임이 종료되면 플레이어는 다시 게임을 할지 여부를 결정할 수 있다.
         if not isPlayingAgain():
             break
