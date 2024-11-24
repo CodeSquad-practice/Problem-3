@@ -11,10 +11,23 @@ def makeRandomCardArray():
 
     return cardArr
 
-def getMoreCard():
+def cheat(deck):
+    print("덱의 카드 ", end='')
+    cnt=0
+    for i in range(len(deck)-1,-1,-1):
+        cnt+=1
+        print(f'[{deck[i]:2}]',end='')
+        if cnt==6:
+            break
+    print()
+
+def getMoreCard(deck):
     while True:
         print('카드를 더 받겠습니까? (Y/N)',end=' ')
         order = input()
+        if order=="codesquad":
+            cheat(deck)
+            continue
         if order == 'Y' or order == 'y':
             return True
         elif order =='N' or order =='n':
@@ -22,10 +35,13 @@ def getMoreCard():
         else: 
             print('잘못 입력하셨습니다.')
 
-def isPlayingAgain():
+def isPlayingAgain(deck):
     while True:
         print('한 게임 더 하시겠습니까? (Y/N)',end=' ')
         order = input()
+        if order == "codesquad":
+            cheat(deck)
+            continue
         if order == 'Y' or order == 'y':
             return True
         elif order =='N' or order =='n':
@@ -41,13 +57,16 @@ def printSum(Hand):
     print(f"총합: {sumCards}")
     return sumCards
 
-def bettingMoney(money):
+def bettingMoney(money,deck):
     while True:
         print("얼마를 거시겠습니까?",end=' ')
         betMoney=input()
-        if not betMoney.isdigit():
+        if betMoney=="codesquad":
+            cheat(deck)
             continue
-        
+        if not betMoney.isdigit():
+            print('잘못 입력하셨습니다.')
+            continue
         betMoney=int(betMoney)
         if betMoney>money or betMoney==0 or betMoney%100!=0:
             print("잘못 입력하셨습니다.")
@@ -106,7 +125,7 @@ def playGame(deck):
         if sumCards>21:
             # 플레이어가 받은 카드의 합이 22 이상이면 무조건 플레이어의 패배이다. 이 때 딜러는 카드를 받지 않는다.
             return "D"
-        if not getMoreCard():
+        if not getMoreCard(deck):
             # 플레이어가 카드를 더 이상 안 받기로 결정한 시점에서 딜러도 카드를 받는다.
             dealerSum=dealerTurn(deck)
             winner=findWinner(sumCards,dealerSum)
@@ -136,7 +155,7 @@ def main():
     while True:
         if len(deck)<=10:
             deck=makeRandomCardArray()
-        betMoney=bettingMoney(money)
+        betMoney=bettingMoney(money,deck)
         print()
         turn+=1
         print("Game",turn)
@@ -146,7 +165,7 @@ def main():
         # 한 게임이 종료되면 플레이어는 다시 게임을 할지 여부를 결정할 수 있다.
         if money == 0: 
             break
-        if not isPlayingAgain():
+        if not isPlayingAgain(deck):
             break
 
 
