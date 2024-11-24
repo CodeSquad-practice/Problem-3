@@ -49,7 +49,6 @@ def isPlayingAgain(deck):
         else: 
             print('잘못 입력하셨습니다.')
 
-
 def printSum(Hand):
     sumCards=0
     for elem in Hand:
@@ -94,7 +93,6 @@ def dealerTurn(deck):
     print()
     print(f"딜러의 카드 합계는 {sumCards}입니다.")
     return sumCards
-
 
 def findWinner(sumCards,dealerSum):
     if dealerSum>21:
@@ -167,34 +165,6 @@ def main():
             break
         if not isPlayingAgain(deck):
             break
-
-
-    
-#     myCards=[]
-#     dealerCards=[]
-#     print('간단 카드게임을 시작합니다.')
-#     while True:
-#         turn +=1
-#         print()
-#         print(f'Game {turn}')
-#         myCards.append(getRandomCard())
-#         dealerCards.append(getRandomCard())
-#         printPlayerDealerCards(myCards,dealerCards)
-
-#         if myCards[-1]>dealerCards[-1]:
-#             win+=1
-#             print('당신이 이겼습니다.')
-#         elif myCards[-1]==dealerCards[-1]:
-#             draw+=1
-#             print('비겼습니다.')
-#         else:
-#             lose+=1
-#             print('딜러가 이겼습니다.')
-#         printRecord(win,draw,lose)
-
-#         if not isPlayingAgain():
-#             print('게임을 종료합니다.\n플레이해주셔서 감사합니다.')
-#             break
 
 if __name__=='__main__':
     main()
