@@ -19,7 +19,7 @@ def makeRandomCardArray():
 
 def isPlayingAgain():
     while True:
-        print('한 게임 더 하시겠습니까? (Y/N)',end=' ')
+        print('카드를 더 받겠습니까? (Y/N)',end=' ')
         order = input()
         if order == 'Y' or order == 'y':
             return True
@@ -27,7 +27,15 @@ def isPlayingAgain():
             return False
         else: 
             print('잘못 입력하셨습니다.')
-    
+
+def printSum(playerHand):
+    sumCards=0
+    for elem in playerHand:
+        sumCards+=elem
+    print(f"총합: {sumCards}")
+    return sumCards
+
+
 # def printPlayerDealerCards(playerCards,dealerCards):
 #     print('YOU   : ',end='')
 #     for card in playerCards:
@@ -60,6 +68,7 @@ def main():
     playerHand=[]
     while True:
         playerTurn(deck,playerHand)
+        printSum(playerHand)
         if not isPlayingAgain():
             break
         
