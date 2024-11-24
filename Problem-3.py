@@ -28,6 +28,18 @@ def getMoreCard():
         else: 
             print('잘못 입력하셨습니다.')
 
+def isPlayingAgain():
+    while True:
+        print('한 게임 더 하시겠습니까? (Y/N)',end=' ')
+        order = input()
+        if order == 'Y' or order == 'y':
+            return True
+        elif order =='N' or order =='n':
+            return False
+        else: 
+            print('잘못 입력하셨습니다.')
+
+
 def printSum(playerHand):
     sumCards=0
     for elem in playerHand:
@@ -88,7 +100,9 @@ def main():
         turn+=1
         print("Game",turn)
         playGame(deck, playerHand)
-        break
+        if not isPlayingAgain():
+            break
+
 
         
 
