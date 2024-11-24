@@ -44,7 +44,11 @@ def printSum(Hand):
 def bettingMoney(money):
     while True:
         print("얼마를 거시겠습니까?",end=' ')
-        betMoney=int(input())
+        betMoney=input()
+        if not betMoney.isdigit():
+            continue
+        
+        betMoney=int(betMoney)
         if betMoney>money or betMoney==0 or betMoney%100!=0:
             print("잘못 입력하셨습니다.")
         else:
