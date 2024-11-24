@@ -46,11 +46,19 @@ def bettingMoney(money):
         else:
             return betMoney
 
+def playerTurn(deck,playerHand):
+    playerHand.append(deck.pop())
+    print("플레이어: ",end='')
+    for elem in playerHand:
+        print(f'[{elem:2}]',end='')
+    print()
 
 def main():
     money=1000
-    betMoney=bettingMoney(money)
-    print(betMoney)
+    # betMoney=bettingMoney(money)
+    deck=makeRandomCardArray()
+    playerHand=[]
+    playerTurn(deck,playerHand)
 
 
 #     turn,win,lose,draw=0,0,0,0
