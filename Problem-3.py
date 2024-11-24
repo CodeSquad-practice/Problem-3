@@ -61,14 +61,20 @@ def playerTurn(deck,playerHand):
         print(f'[{elem:2}]',end='')
     print()
 
+
 def main():
     money=1000
-    # betMoney=bettingMoney(money)
+    betMoney=bettingMoney(money)
     deck=makeRandomCardArray()
     playerHand=[]
     while True:
         playerTurn(deck,playerHand)
-        printSum(playerHand)
+        sumCards=printSum(playerHand)
+        if sumCards>21:
+            #플레이어 패배
+            money-=betMoney
+            print("당신의 패배입니다. 현재 재산:",money)
+            break
         if not isPlayingAgain():
             break
         
