@@ -38,19 +38,8 @@ def printSum(Hand):
     sumCards=0
     for elem in Hand:
         sumCards+=elem
-    # print(f"총합: {sumCards}")
+    print(f"총합: {sumCards}")
     return sumCards
-
-
-# def printPlayerDealerCards(playerCards,dealerCards):
-#     print('YOU   : ',end='')
-#     for card in playerCards:
-#         print(f'[{card:2}]',end=' ')
-#     print()
-#     print('Dealer: ',end='')
-#     for card in dealerCards:
-#         print(f'[{card:2}]',end=' ')
-#     print()
 
 def bettingMoney(money):
     while True:
@@ -86,9 +75,13 @@ def dealerTurn(deck):
 
 def findWinner(sumCards,dealerSum):
     if dealerSum>21:
+        if sumCards==21:
+            return "B"
         # 딜러의 카드가 22 이상이어도 플레이어의 승리이다.
         return "P"
     if dealerSum<sumCards:
+        if sumCards==21:
+            return "B"
         # 플레이어의 카드 합이 딜러보다 크다면 플레이어의 승리이다.
         return "P"
     if dealerSum>sumCards: 
@@ -103,7 +96,8 @@ def findWinner(sumCards,dealerSum):
             #draw
             return "draw"
 
-def playGame(deck,playerHand):
+def playGame(deck):
+    playerHand=[]
     while True:
         playerTurn(deck,playerHand)
         sumCards=printSum(playerHand)
@@ -117,8 +111,10 @@ def playGame(deck,playerHand):
             return winner
             
 def gameResult(winner,money,betMoney):
-    if winner=="P":
+    if winner=="P"or winner=="B":
         print("당신의 승리입니다.")
+        if winner=="B":
+            money+=betMoney
         money+=betMoney
     elif winner=="D":
         print("당신의 패배입니다.")
@@ -140,11 +136,9 @@ def main():
         print()
         turn+=1
         print("Game",turn)
-        playerHand=[]
-        winner=playGame(deck, playerHand)
+        winner=playGame(deck)
         money=gameResult(winner,money,betMoney)
         
-
         # 한 게임이 종료되면 플레이어는 다시 게임을 할지 여부를 결정할 수 있다.
         if not isPlayingAgain():
             break
