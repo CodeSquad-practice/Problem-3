@@ -11,12 +11,6 @@ def makeRandomCardArray():
 
     return cardArr
 
-# def printRecord(win,draw,lose):
-#     if draw==0:
-#         print(f'현재전적 : {win}승 {lose}패')
-#     else:
-#         print(f'현재전적 : {win}승 {draw}무 {lose}패')
-
 def getMoreCard():
     while True:
         print('카드를 더 받겠습니까? (Y/N)',end=' ')
@@ -77,7 +71,8 @@ def playerTurn(deck,playerHand):
 def dealerTurn(deck):
     sumCards=0
     dealerHand=[]
-    while sumCards<17:
+# 딜러는 16 이하이면 무조건 카드를 받고, 17 이상이면 카드를 받지 않는다.
+    while sumCards<17:        
         card=deck.pop()
         sumCards+=card
         dealerHand.append(card)
@@ -89,18 +84,40 @@ def dealerTurn(deck):
     return sumCards
 
 
+def findWinner(sumCards,dealerSum):
+    if dealerSum>21:
+        # 딜러의 카드가 22 이상이어도 플레이어의 승리이다.
+        return "P"
+    if dealerSum<sumCards:
+        # 플레이어의 카드 합이 딜러보다 크다면 플레이어의 승리이다.
+        return "P"
+    if dealerSum>sumCards: 
+        # 딜러의 카드합이 더 큰 값이라면 딜러의 승리이다.
+        return "D"
+    # 같은 값이라면 서로 비기게 된다. 단 딜러가 21을 뽑을 경우도 딜러가 승리한다.
+    if dealerSum==sumCards:
+        if dealerSum==21:
+            #dealer win
+            return "D"
+        else:
+            #draw
+            return "draw"
+
 def playGame(deck,playerHand):
     while True:
         playerTurn(deck,playerHand)
         sumCards=printSum(playerHand)
         if sumCards>21:
-            #플레이어 패배
+            # 플레이어가 받은 카드의 합이 22 이상이면 무조건 플레이어의 패배이다. 이 때 딜러는 카드를 받지 않는다.
             # money-=betMoney
             # print("당신의 패배입니다. 현재 재산:",money)
-            break
+            return "D"
         if not getMoreCard():
+            # 플레이어가 카드를 더 이상 안 받기로 결정한 시점에서 딜러도 카드를 받는다.
             dealerSum=dealerTurn(deck)
-            break
+            winner=findWinner(sumCards,dealerSum)
+            return winner
+            
             
 
 def main():
@@ -117,6 +134,8 @@ def main():
         print("Game",turn)
         playerHand=[]
         playGame(deck, playerHand)
+        
+        # 한 게임이 종료되면 플레이어는 다시 게임을 할지 여부를 결정할 수 있다.
         if not isPlayingAgain():
             break
 
