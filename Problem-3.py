@@ -90,10 +90,8 @@ def findWinner(sumCards,dealerSum):
     # 같은 값이라면 서로 비기게 된다. 단 딜러가 21을 뽑을 경우도 딜러가 승리한다.
     if dealerSum==sumCards:
         if dealerSum==21:
-            #dealer win
             return "D"
         else:
-            #draw
             return "draw"
 
 def playGame(deck):
@@ -132,6 +130,8 @@ def main():
     print("현재 재산:",money)
 
     while True:
+        if len(deck)<=10:
+            deck=makeRandomCardArray()
         betMoney=bettingMoney(money)
         print()
         turn+=1
@@ -140,6 +140,8 @@ def main():
         money=gameResult(winner,money,betMoney)
         
         # 한 게임이 종료되면 플레이어는 다시 게임을 할지 여부를 결정할 수 있다.
+        if money == 0: 
+            break
         if not isPlayingAgain():
             break
 
