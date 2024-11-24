@@ -48,6 +48,7 @@ def printSum(playerHand):
 
 def bettingMoney(money):
     while True:
+        print("얼마를 거시겠습니까?",end=' ')
         betMoney=int(input())
         if betMoney>money or betMoney==0 or betMoney%100!=0:
             print("잘못 입력하셨습니다.")
@@ -64,9 +65,13 @@ def playerTurn(deck,playerHand):
 
 def main():
     money=1000
-    betMoney=bettingMoney(money)
+    
     deck=makeRandomCardArray()
     playerHand=[]
+    print("간단 카드게임을 시작합니다.")
+    print("현재 재산:",money)
+    betMoney=bettingMoney(money)
+
     while True:
         playerTurn(deck,playerHand)
         sumCards=printSum(playerHand)
