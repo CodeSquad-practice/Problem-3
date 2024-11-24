@@ -40,11 +40,11 @@ def isPlayingAgain():
             print('잘못 입력하셨습니다.')
 
 
-def printSum(playerHand):
+def printSum(Hand):
     sumCards=0
-    for elem in playerHand:
+    for elem in Hand:
         sumCards+=elem
-    print(f"총합: {sumCards}")
+    # print(f"총합: {sumCards}")
     return sumCards
 
 
@@ -74,6 +74,21 @@ def playerTurn(deck,playerHand):
         print(f'[{elem:2}]',end='')
     print()
 
+def dealerTurn(deck):
+    sumCards=0
+    dealerHand=[]
+    while sumCards<17:
+        card=deck.pop()
+        sumCards+=card
+        dealerHand.append(card)
+    print("딜러: ",end='')
+    for elem in dealerHand:
+        print(f'[{elem:2}]',end='')
+    print()
+    print(f"딜러의 카드 합계는 {sumCards}입니다.")
+    return sumCards
+
+
 def playGame(deck,playerHand):
     while True:
         playerTurn(deck,playerHand)
@@ -84,6 +99,7 @@ def playGame(deck,playerHand):
             # print("당신의 패배입니다. 현재 재산:",money)
             break
         if not getMoreCard():
+            dealerSum=dealerTurn(deck)
             break
             
 
@@ -91,20 +107,18 @@ def main():
     money=1000
     turn=0
     deck=makeRandomCardArray()
-    playerHand=[]
     print("간단 카드게임을 시작합니다.")
     print("현재 재산:",money)
-    betMoney=bettingMoney(money)
 
     while True:
+        betMoney=bettingMoney(money)
+        print()
         turn+=1
         print("Game",turn)
+        playerHand=[]
         playGame(deck, playerHand)
         if not isPlayingAgain():
             break
-
-
-        
 
 
     
