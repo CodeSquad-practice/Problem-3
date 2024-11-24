@@ -38,8 +38,21 @@ def makeRandomCardArray():
 #         print(f'[{card:2}]',end=' ')
 #     print()
 
+def bettingMoney(money):
+    while True:
+        betMoney=int(input())
+        if betMoney>money or betMoney==0 or betMoney%100!=0:
+            print("잘못 입력하셨습니다.")
+        else:
+            return betMoney
 
-# def main():
+
+def main():
+    money=1000
+    betMoney=bettingMoney(money)
+    print(betMoney)
+
+
 #     turn,win,lose,draw=0,0,0,0
 #     myCards=[]
 #     dealerCards=[]
@@ -67,5 +80,5 @@ def makeRandomCardArray():
 #             print('게임을 종료합니다.\n플레이해주셔서 감사합니다.')
 #             break
 
-# if __name__=='__main__':
-#     main()
+if __name__=='__main__':
+    main()
