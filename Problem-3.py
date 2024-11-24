@@ -17,16 +17,16 @@ def makeRandomCardArray():
 #     else:
 #         print(f'현재전적 : {win}승 {draw}무 {lose}패')
 
-# def isPlayingAgain():
-#     while True:
-#         print('한 게임 더 하시겠습니까? (Y/N)',end=' ')
-#         order = input()
-#         if order == 'Y' or order == 'y':
-#             return True
-#         elif order =='N' or order =='n':
-#             return False
-#         else: 
-#             print('잘못 입력하셨습니다.')
+def isPlayingAgain():
+    while True:
+        print('한 게임 더 하시겠습니까? (Y/N)',end=' ')
+        order = input()
+        if order == 'Y' or order == 'y':
+            return True
+        elif order =='N' or order =='n':
+            return False
+        else: 
+            print('잘못 입력하셨습니다.')
     
 # def printPlayerDealerCards(playerCards,dealerCards):
 #     print('YOU   : ',end='')
@@ -58,7 +58,11 @@ def main():
     # betMoney=bettingMoney(money)
     deck=makeRandomCardArray()
     playerHand=[]
-    playerTurn(deck,playerHand)
+    while True:
+        playerTurn(deck,playerHand)
+        if not isPlayingAgain():
+            break
+        
 
 
 #     turn,win,lose,draw=0,0,0,0
